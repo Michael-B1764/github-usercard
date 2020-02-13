@@ -1,7 +1,32 @@
+//object structure for my profile
+
+  let testData = {
+    data: {
+      profileImg: "https://avatars3.githubusercontent.com/u/58165510?v=4",
+      name: "Michael Bailar",
+      login: "Michael-B1764" ,
+      location: "Seattle",
+      html_url: "https://github.com/Michael-B1764",
+      followers: 5,
+      following: 0,
+      bio: "test"
+    }
+  }
+
+
+
+
 /* Step 1: using axios, send a GET request to the following URL 
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+// axios.get('https://api.github.com/users/Michael-B1764')
+//     .then( response => {
+//         console.log(response);
+//     })
+//     .catch( err => {
+//         console.log(err);
+//     })
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -13,7 +38,41 @@
 /* Step 4: Pass the data received from Github into your function, 
            create a new component and add it to the DOM as a child of .cards
 */
+const createCard = (obj) => {
+  //declare vars
+  let cards = document.querySelector('.cards');
+  let card = document.createElement('div');
+  let cardProfileImg = document.createElement('img');
+  let cardName = document.createElement('p');
+  let cardUsername = document.createElement('p');
+  let cardLocation = document.createElement('p');
+  let cardProfileLink = document.createElement('a');
+  let cardFollowers = document.createElement('p');
+  let cardFollowing = document.createElement('p');
+  let cardBio = document.createElement('p');
+  //setup structure
+  cards.append(card);
+  card.append(cardProfileImg, cardName, cardUsername, cardLocation);
+  card.append (cardProfileLink, cardFollowers, cardFollowing, cardBio);
+  //set classes
+  card.classList.add('card');
+  cardName.classList.add('name');
+  cardUsername.classList.add('username');
+  //add information
+  cardProfileImg.src = (obj.data.profileImg);
+  cardName.innerHTML = (obj.data.name);
+  cardUsername.innerHTML = (obj.data.login);
+  cardLocation.innerHTML = (obj.data.location);
+  cardProfileLink.href = (obj.data['html_url']);
+  cardProfileLink.innerHTML = (obj.data['html_url']);
+  cardFollowers.innerHTML = (obj.data.followers);
+  cardFollowing.innerHTML = (obj.data.following);
+  cardBio.innerHTML = (obj.data.bio);
 
+}
+
+
+createCard(testData);
 /* Step 5: Now that you have your own card getting added to the DOM, either 
           follow this link in your browser https://api.github.com/users/<Your github name>/followers 
           , manually find some other users' github handles, or use the list found 
